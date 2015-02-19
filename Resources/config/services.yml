@@ -1,0 +1,4 @@
+services:
+#    sh4ka_news_orm.example:
+#        class: Sh4ka\NewsORMBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
