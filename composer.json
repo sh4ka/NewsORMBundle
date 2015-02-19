@@ -14,5 +14,10 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Sh4ka\\NewsORMBundle" : ""
+        }
     }
 }
