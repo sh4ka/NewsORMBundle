@@ -1,5 +1,5 @@
 {
-    "name": "Sh4ka/NewsORMBundle",
+    "name": "sh4ka/news-orm-bundle",
     "description": "News orm bundle",
     "require": {
 	"php": ">=5.3.3",
