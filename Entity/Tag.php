@@ -33,13 +33,24 @@ class Tag
      **/
     private $articles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Category", mappedBy="tags")
+     **/
+    private $categories;
+
     public function __construct() {
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function addArticle(Article $article)
     {
         $this->articles[] = $article;
+    }
+
+    public function addCategory(Category $category)
+    {
+        $this->categories[] = $category;
     }
 
     /**
