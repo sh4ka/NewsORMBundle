@@ -34,13 +34,19 @@ class Tag
     private $articles;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Category", mappedBy="tags")
+     * @ORM\OneToMany(targetEntity="Tag", mappedBy="parent")
      **/
-    private $categories;
+    private $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     **/
+    private $parent;
 
     public function __construct() {
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function addArticle(Article $article)
@@ -48,9 +54,9 @@ class Tag
         $this->articles[] = $article;
     }
 
-    public function addCategory(Category $category)
+    public function addChild(Tag $tag)
     {
-        $this->categories[] = $category;
+        $this->children[] = $tag;
     }
 
     /**
