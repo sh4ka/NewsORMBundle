@@ -30,17 +30,20 @@ class Tag
 
     /**
      * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
+     * @MaxDepth(1)
      **/
     private $articles;
 
     /**
      * @ORM\OneToMany(targetEntity="Tag", mappedBy="parent")
+     * @MaxDepth(1)
      **/
     private $children;
 
     /**
      * @ORM\ManyToOne(targetEntity="Tag", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @MaxDepth(1)
      **/
     private $parent;
 
