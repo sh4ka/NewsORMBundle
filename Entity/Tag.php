@@ -3,6 +3,7 @@
 namespace Sh4ka\NewsORMBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * Tag
@@ -29,27 +30,20 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
-     * @MaxDepth(1)
-     **/
-    private $articles;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Tag", mappedBy="parent")
-     * @MaxDepth(1)
-     **/
-    private $children;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tags")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      * @MaxDepth(1)
      **/
     private $parent;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
+     * @MaxDepth(1)
+     **/
+    private $articles;
+
     public function __construct() {
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function addArticle(Article $article)
@@ -57,15 +51,58 @@ class Tag
         $this->articles[] = $article;
     }
 
-    public function addChild(Tag $tag)
+    /**
+     * <description>
+     *
+     * @return mixed
+     */
+    public function getArticles()
     {
-        $this->children[] = $tag;
+        return $this->articles;
     }
+
+    /**
+     * <description>
+     *
+     * @param mixed $articles <param_description>
+     *
+     * @return $this
+     */
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+        return $this;
+    }
+
+    /**
+     * <description>
+     *
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * <description>
+     *
+     * @param mixed $parent <param_description>
+     *
+     * @return $this
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+        return $this;
+    }
+
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -88,7 +125,7 @@ class Tag
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
